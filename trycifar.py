@@ -5,7 +5,9 @@ def softmax_model():
     return make_net(l)
 
 def neural_net():
-    l = [   make_connected_layer(3072, 32, LRELU),
+    l = [   make_connected_layer(3072, 128, LRELU),
+	    make_connected_layer(128, 64, LRELU),
+	    make_connected_layer(64, 32, LRELU),
             make_connected_layer(32, 10, SOFTMAX)]
     return make_net(l)
 
@@ -17,12 +19,12 @@ print
 
 print("making model...")
 batch = 128
-iters = 5000
-rate = .01
+iters = 3000
+rate = .08
 momentum = .9
-decay = .0
+decay = .001
 
-m = softmax_model()
+m = neural_net()
 print("training...")
 train_image_classifier(m, train, batch, iters, rate, momentum, decay)
 print("done")
